@@ -4,16 +4,19 @@
 	<meta charset="UTF-8">
 	<title>Click Tracker</title>
 	<script type="text/javascript">
-		var counter = 0;
-		function trackClick(){
-			++counter;
-			document.getElementById("divMessage").innerHTML = counter;
-		}
-		function init(){
-			var btnTrack = document.getElementById("btnTrack");
-			btnTrack.addEventListener("click", trackClick);
-		}
-		window.addEventListener("DOMContentLoaded", init);
+		(function(){
+			var counter = 0;
+			function trackClick(){
+				++counter;
+				document.getElementById("divMessage").innerHTML = counter;
+			}
+			function init(){
+				var btnTrack = document.getElementById("btnTrack");
+				btnTrack.addEventListener("click", trackClick);
+			}
+			window.addEventListener("DOMContentLoaded", init);
+		})();
+		//myApp();
 	</script>
 </head>
 <body>
