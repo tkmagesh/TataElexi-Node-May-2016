@@ -1,4 +1,6 @@
 var accumulator = require('./accumulator.js');
+
+
 accumulator.add(100);
 accumulator.subtract(50);
 accumulator.multiply(10);
