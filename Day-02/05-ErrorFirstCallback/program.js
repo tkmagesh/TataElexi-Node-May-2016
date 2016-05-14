@@ -26,24 +26,25 @@ function divide(x,y,onResult){
 	setTimeout(function(){
 		if (y === 0){
 			console.log('      [Service] throwing error');
-			throw new Error('Invalid arguments error - Cannot divide by zero');
+			var error = new Error('Invalid arguments error - Cannot divide by zero');
+			return onResult(error, null);
 		}
 		var result = x / y;
 		console.log('      [Service] returning result');
 		if (typeof onResult === 'function')
-			onResult(result);
+			onResult(null, result);
 	},2000);
 }
 
 function divideClient(x,y){
 	console.log('[Client] triggering divide');
-	try {
-		divide(x,y, function(result){
-			console.log('[Client] result = ', result);
-		});
-	} catch (e){
-		console.log('[Client] something went wrong');
-	}
+	divide(x,y, function(err, result){
+		if (err){
+			console.log('[Client] something went wrong');
+			return;
+		}
+		console.log('[Client] result = ', result);
+	});
 }
 
 module.exports.divideSyncClient = divideSyncClient;
