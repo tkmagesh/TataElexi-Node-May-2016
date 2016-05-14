@@ -1,0 +1,7 @@
+Refactor the server.js to the following components:
+
+logs the requests 			- consoleLogger.js
+parses the data 			- dataParser.js
+serves static resources 	- serveStatic.js
+serves /calculator requests - calculatorHandler.js
+serves 404 					- notFoundHandler.js
