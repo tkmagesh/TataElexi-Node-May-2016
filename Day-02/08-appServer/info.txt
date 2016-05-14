@@ -1,0 +1,25 @@
+/index.html
+/jquery.js
+/style.css
+/favicon.ico
+
+/calculator?op=add&n1=100&n2=200
+
+
+
+1. check if the request is for a static resource
+	 static resource - resouce extn is .html, .css, .js, .jpg, .png, .ico, .xml, .json, .txt
+	 	if static 
+	 		if exists
+		 		serve the resource
+		 	else
+		 		serve 404
+		else 
+			if /calculator
+				extract info
+				process using calculator.js
+				send the result
+			else
+				serve 'coming soon...!'
+			end if
+		end if
