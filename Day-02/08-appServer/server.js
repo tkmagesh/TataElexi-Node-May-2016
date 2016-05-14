@@ -31,9 +31,15 @@ var server = http.createServer(function(req, res){
 		var op = data.op,
 			n1 = parseInt(data.n1, 10),
 			n2 = parseInt(data.n2, 10);
-		var result = calculator[op](n1, n2);
-		res.write(result.toString());
-		res.end();
+		try{
+			var result = calculator[op](n1, n2);
+			res.write(result.toString());
+			res.end();	
+		} catch (err){
+			res.statusCode= 500;
+			res.end();
+		}
+		
 	} else {
 		res.write('coming soon');
 		res.end();
