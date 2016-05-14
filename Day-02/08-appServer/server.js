@@ -26,11 +26,11 @@ var server = http.createServer(function(req, res){
 				fs.createReadStream(resource).pipe(res);
 			}
 		});
-	} else if (urlObj.pathname === '/calculator'){
-		var data = querystring.parse(urlObj.query);
-		var op = data.op,
-			n1 = parseInt(data.n1, 10),
-			n2 = parseInt(data.n2, 10);
+	} else if (urlObj.pathname === '/calculator' && req.method === 'GET'){
+		var reqData = querystring.parse(urlObj.query);
+		var op = reqData.op,
+			n1 = parseInt(reqData.n1, 10),
+			n2 = parseInt(reqData.n2, 10);
 		try{
 			var result = calculator[op](n1, n2);
 			res.write(result.toString());
@@ -40,6 +40,25 @@ var server = http.createServer(function(req, res){
 			res.end();
 		}
 		
+	} else if (urlObj.pathname === '/calculator' && req.method === 'POST'){
+		var rawReqData = '';
+		req.on('data', function(chunk){
+			rawReqData += chunk;
+		});
+		req.on('end', function(){
+			var reqData = querystring.parse(rawReqData);
+			var op = reqData.op,
+				n1 = parseInt(reqData.n1, 10),
+				n2 = parseInt(reqData.n2, 10);
+			try{
+				var result = calculator[op](n1, n2);
+				res.write(result.toString());
+				res.end();	
+			} catch (err){
+				res.statusCode= 500;
+				res.end();
+			}	
+		});
 	} else {
 		res.write('coming soon');
 		res.end();
