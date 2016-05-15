@@ -84,7 +84,14 @@ var fns = [f1, f2, f3, f4];
 
 module.exports.run = function(){
 	//rewrite the below code (sync functions) to work with async functions (f1, f2...);
-	for(var i=0; i<fns.length; i++){
-		fns[i]();
+	function exec(fns){
+		var first = fns[0],
+			remaining = fns.slice(1),
+			next = function(){
+				exec(remaining);
+			};
+		if (typeof first === 'function')
+			first(next);
 	}
+	exec(fns);
 }

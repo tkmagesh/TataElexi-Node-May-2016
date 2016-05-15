@@ -6,7 +6,7 @@ function isStatic(resource){
 	return staticResourceExtns.indexOf(path.extname(resource)) !== -1;
 }
 
-module.exports = function(req, res){
+module.exports = function(req, res, next){
 	if (isStatic(req.data.pathname)){
 		var resource = path.join(__dirname, req.data.pathname);
 		fs.stat(resource, function(err, stats){
@@ -27,5 +27,7 @@ module.exports = function(req, res){
 				});
 			}
 		});
+	} else {
+		next();
 	} 
 }
