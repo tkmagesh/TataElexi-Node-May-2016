@@ -1,0 +1,18 @@
+{
+  "name": "appServer",
+  "version": "1.0.0",
+  "description": "a demo app server ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "demo"
+  ],
+  "author": "Magesh K",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3"
+  }
+}
