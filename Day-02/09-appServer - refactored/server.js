@@ -1,4 +1,5 @@
 var http = require('http'),
+	path = require('path'),
 	logger = require('./logger'),
 	dataParser = require('./dataParser'),
 	serveStatic = require('./serveStatic'),
@@ -8,7 +9,7 @@ var http = require('http'),
 
 app.use(logger);
 app.use(dataParser);
-app.use(serveStatic);
+app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(calculatorHandler);
 app.use(notFoundHandler);
 
