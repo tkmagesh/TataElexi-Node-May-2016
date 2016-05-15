@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <title>Server Sent Events - client  </title>  
+    <style>
+        .highlight  {
+             color : red;
+            font-weight: bold;
+            font-style: italic; 
+        }
+    </style>
+    <script>
+        window.addEventListener("DOMContentLoaded", init);
+        var esConnection = null;
+        function init(){
+            var btnConnect = document.getElementById("btnConnect");
+            btnConnect.addEventListener("click", onBtnConnectClick);
+        }
+        function onBtnConnectClick(){
+            esConnection = new EventSource('./stream');
+            esConnection.addEventListener('message', onMessageFromServer);
+            esConnection.addEventListener('fileChange', onFileChangeMessageFromServer);
+        }
+        function onMessageFromServer(evtArg){
+            document.getElementById("divMessages").innerHTML += '<div>' + evtArg.data + '</div>';
+        }
+        function onFileChangeMessageFromServer(evtArg){
+            /*document.getElementById("divMessages").innerHTML += '<div class="highlight">' + evtArg.data + '</div>';*/
+            window.location.reload();
+        }  
+    </script>
+</head>
+<body>
+    <h1 style="color : red">Server Sent Events</h1>
+    <input type="button" value="Connect" id="btnConnect">
+    <div id="divMessages"></div>
+</body>
+</html>

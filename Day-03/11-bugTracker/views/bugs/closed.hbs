@@ -21,4 +21,7 @@
 		</li>
 	{{/each}}
 </ol>
-<a href="/bugs/new">Create New</a> <a href="/bugs/closed"> Closed </a>
+<form action="/bugs/removeClosed" method="post">
+	<input type="hidden" name="closedList" value="{{ids}}">
+	<input type="submit" value="Remove Closed">
+</form>
