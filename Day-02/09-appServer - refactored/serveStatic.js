@@ -16,15 +16,7 @@ module.exports = function(req, res, next){
 				return;
 			}
 			if (stats.isFile()){
-				//fs.createReadStream(resource).pipe(res);
-				var stream = fs.createReadStream(resource);
-				stream.on('data', function(chunk){
-					console.log('serving static resource');
-					res.write(chunk);
-				});
-				stream.on('end', function(){
-					res.end();
-				});
+				fs.createReadStream(resource).pipe(res);
 			}
 		});
 	} else {
